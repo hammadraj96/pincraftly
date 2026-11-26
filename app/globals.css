@@ -1,9 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #E60023;
+  --color-primary-hover: #C4001D;
+  --color-primary-light: #FFF0F1;
+  --color-primary-light-alt: #FFE7E9;
+  --color-primary-light-soft: #FFF7F8;
+  --color-dark: #23222E;
+  --color-white: #ffffff;
+  --color-text-muted: #64748b;
+  --color-border: #f1f5f9;
+  --color-tag-yellow: #ffe06a;
+  --font-base: 'Google Sans', 'Product Sans', Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+  --font-accent: 'Caveat', cursive, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme {
+  --color-primary: #E60023;
+  --color-primary-hover: #C4001D;
+  --color-primary-light: #FFF0F1;
+  --color-dark: #23222E;
+}
+
 /* PinCraftly landing page - styles extracted from the single-file export. */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; overflow-x: clip; }
 body {
     margin: 0;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-base);
     background: #ffffff;
     color: #23222E;
     -webkit-font-smoothing: antialiased;
@@ -19,7 +50,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     position: relative;
     background: #E60023;
     color: #ffffff;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
     font-size: 13.5px;
     font-weight: 500;
     line-height: 1.3;
@@ -162,7 +193,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     white-space: nowrap;
     min-height: 36px;
     border-radius: 10px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
     font-size: 14.5px;
     font-weight: 650;
     color: #334155;
@@ -215,7 +246,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 .mm-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .mm-h {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     margin: 0 0 10px;
     font-size: 11.5px;
     font-weight: 800;
@@ -311,7 +342,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     padding: 10px 24px;
     min-height: 48px;
     border-radius: 12px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
     font-size: 16px;
     font-weight: 600;
     box-shadow: rgba(36, 54, 102, 0.094) 0px 3px 12px;
@@ -417,97 +448,124 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     inset: 0;
     z-index: 190;
     background: rgba(35, 34, 46, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
   }
 .hdr-backdrop.open {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.3s ease, visibility 0s linear 0s;
   }
 .hdr-sheet {
     position: fixed;
     top: 0;
     right: 0;
+    bottom: 0;
     z-index: 200;
-    width: 320px;
-    max-width: 85vw;
+    width: 340px;
+    max-width: 88vw;
     height: 100vh;
     height: 100dvh;
     background: #ffffff;
-    box-shadow: -18px 0 44px rgba(35, 34, 46, 0.22);
+    box-shadow: -10px 0 35px rgba(35, 34, 46, 0.18);
     display: flex;
     flex-direction: column;
-    transform: translateX(110%);
-    transition: transform 0.3s ease;
+    transform: translate3d(100%, 0, 0);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
   }
 .hdr-sheet[hidden] { display: none; }
-.hdr-sheet.open { transform: translateX(0); }
+.hdr-sheet.open { transform: translate3d(0, 0, 0); }
 .hdr-drawer-head {
     flex: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 12px 12px 12px 20px;
+    padding: 14px 16px;
     border-bottom: 1px solid #f1f5f9;
   }
-.hdr-drawer-head .hdr-logo-img { height: 32px; }
+.hdr-drawer-head .hdr-logo-img { height: 32px; width: auto; }
 .hdr-drawer-close {
     flex: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    min-height: 40px;
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
     padding: 0;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     background: #ffffff;
     color: #23222E;
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-.hdr-drawer-close:hover { background: #FFF0F1; color: #E60023; }
+.hdr-drawer-close:hover,
+.hdr-drawer-close:active {
+    background: #FFF0F1;
+    color: #E60023;
+    border-color: #ffd4d8;
+  }
 .hdr-sheet-in {
     flex: 1 1 auto;
     overflow-y: auto;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 16px 16px 20px;
+    gap: 8px;
+    padding: 14px 14px 24px;
   }
 .hdr-sheet-link {
+    display: flex;
+    align-items: center;
     padding: 12px 14px;
+    min-height: 46px;
     border-radius: 10px;
     font-size: 15px;
     font-weight: 700;
     color: #0f172a;
     text-decoration: none;
     background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-.hdr-sheet-link:hover { background: #FFF0F1; color: #E60023; }
+.hdr-sheet-link:hover,
+.hdr-sheet-link:active {
+    background: #FFF0F1;
+    color: #E60023;
+    border-color: #ffd4d8;
+  }
 .hdr-sheet-btns {
     flex: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+    padding: 14px 14px calc(14px + env(safe-area-inset-bottom, 0px));
     border-top: 1px solid #f1f5f9;
     background: #ffffff;
   }
-.hdr-sheet-btns .btn { width: 100%; }
+.hdr-sheet-btns .btn { width: 100%; justify-content: center; min-height: 46px; }
 @media (prefers-reduced-motion: reduce) {
   .hdr-sheet, .hdr-backdrop { transition: none; }
 }
 /* Mobile Drawer Accordions (Product + Free Tools mega-menu content) */
 .hdr-acc {
     background: #f8fafc;
-    border-radius: 10px;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
     overflow: hidden;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+.hdr-acc.is-open {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 4px 16px rgba(35, 34, 46, 0.06);
   }
 .hdr-acc-btn {
     width: 100%;
@@ -516,25 +574,141 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     justify-content: space-between;
     gap: 8px;
     padding: 12px 14px;
-    min-height: 44px;
+    min-height: 46px;
     border: 0;
     background: transparent;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
     font-size: 15px;
     font-weight: 700;
     color: #0f172a;
     cursor: pointer;
     text-align: left;
+    transition: background 0.15s ease, color 0.15s ease;
   }
-.hdr-acc-btn:hover { background: #FFF0F1; color: #E60023; }
-.hdr-acc-chev { flex-shrink: 0; transition: transform 0.2s ease; }
-.hdr-acc-btn[aria-expanded="true"] { color: #E60023; background: #FFF0F1; }
-.hdr-acc-btn[aria-expanded="true"] .hdr-acc-chev { transform: rotate(180deg); }
-.hdr-acc-panel { padding: 6px 6px 12px; }
-.hdr-acc-panel[hidden] { display: none; }
-.hdr-acc-panel .mm-h { margin: 10px 8px 4px; }
-.hdr-acc-panel .mm-h:first-child { margin-top: 4px; }
-.hdr-acc-panel .mm-item { width: 100%; }
+.hdr-acc-btn:hover,
+.hdr-acc-btn:active {
+    background: #FFF0F1;
+    color: #E60023;
+  }
+.hdr-acc-chev {
+    flex-shrink: 0;
+    transition: transform 0.22s ease;
+  }
+.hdr-acc-btn[aria-expanded="true"],
+.hdr-acc-btn.is-active {
+    color: #E60023;
+    background: #FFF0F1;
+    border-bottom: 1px solid rgba(230, 0, 35, 0.08);
+  }
+.hdr-acc-btn[aria-expanded="true"] .hdr-acc-chev {
+    transform: rotate(180deg);
+  }
+.hdr-acc-panel {
+    padding: 8px 8px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #ffffff;
+  }
+.hdr-acc-panel[hidden] {
+    display: none;
+  }
+.hdr-acc-panel .mm-h {
+    margin: 10px 8px 4px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94a3b8;
+  }
+.hdr-acc-panel .mm-h:first-child {
+    margin-top: 4px;
+  }
+.hdr-acc-panel .mm-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    background: transparent;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background 0.15s ease;
+  }
+.hdr-acc-panel .mm-item:hover,
+.hdr-acc-panel .mm-item:active {
+    background: #FFF0F1;
+  }
+.hdr-acc-panel .mm-ic {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+.hdr-acc-panel .mm-ic svg {
+    width: 18px;
+    height: 18px;
+  }
+.hdr-acc-panel .mm-item b {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+    transition: color 0.15s ease;
+  }
+.hdr-acc-panel .mm-item:hover b,
+.hdr-acc-panel .mm-item:active b {
+    color: #E60023;
+  }
+.hdr-acc-panel .mm-item small {
+    display: block;
+    font-size: 11.5px;
+    color: #64748b;
+    line-height: 1.35;
+    margin-top: 2px;
+    white-space: normal;
+    word-break: break-word;
+  }
+.hdr-acc-panel .mm-foot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #FFF0F1;
+    color: #23222E;
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+.hdr-acc-panel .mm-foot:hover,
+.hdr-acc-panel .mm-foot:active {
+    background: #ffe3e6;
+  }
+.hdr-acc-panel .mm-foot-tag {
+    flex: none;
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: #E60023;
+    color: #ffffff;
+    font-size: 10.5px;
+    font-weight: 750;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+.hdr-acc-panel .mm-foot-arrow {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    color: #E60023;
+  }
 /* ==========================================================================
      HERO SECTION (.hero)
      ========================================================================== */
@@ -551,7 +725,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
                 radial-gradient(40% 40% at 85% 30%, #FFE7E9 0%, rgba(255, 255, 255, 0) 65%),
                 radial-gradient(35% 35% at 15% 35%, #FFF0F1 0%, rgba(255, 255, 255, 0) 60%),
                 #ffffff;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-base);
   }
 /* Cursor-following pink line + dot grid — visible only in a soft circle
      around the pointer. Uses the exact same grid as the static .hero::before
@@ -809,7 +983,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* Main H1 Headline with Straight Accent Underline */
 .hero .h1 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.4rem, 5vw, 4.1rem);
     font-weight: 850;
     letter-spacing: -0.04em;
@@ -855,7 +1029,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     position: absolute;
     top: -34px;
     left: 10px;
-    font-family: 'Caveat', cursive, sans-serif;
+    font-family: var(--font-accent);
     font-size: 21px;
     font-weight: 700;
     color: #E60023;
@@ -890,7 +1064,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     min-width: 0;
     border: 0;
     outline: none;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
     font-size: 15px;
     color: #0f172a;
     background: transparent;
@@ -907,7 +1081,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     background: #E60023;
     color: #ffffff;
     border: 0;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
     font-size: 16px;
     font-weight: 600;
     box-shadow: rgba(36, 54, 102, 0.094) 0px 3px 12px;
@@ -969,7 +1143,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     background: #ffffff;
     overflow-x: clip;
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 .prob-head {
     display: grid;
@@ -977,7 +1151,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     gap: 60px;
     align-items: center;
     margin-bottom: 64px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 /* Left Canvas Container */
 .prob-art--custom {
@@ -1234,7 +1408,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     box-shadow: none;
   }
 .prob-copy .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.1rem, 3.6vw, 2.85rem);
     font-weight: 850;
     letter-spacing: -0.035em;
@@ -1372,7 +1546,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     padding: 30px 32px 28px;
   }
 .prob-card h3 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: 22px;
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -1505,7 +1679,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     padding: 88px 0 96px;
     background: #ffffff;
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 /* Subtle Ambient Gradient Accents */
 .sec--feats::before {
@@ -1542,7 +1716,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 Headline with Straight Accent Underline */
 .sec--feats .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.15rem, 3.8vw, 2.9rem);
     font-weight: 850;
     letter-spacing: -0.035em;
@@ -1623,7 +1797,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* Card Heading */
 .feat h3 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     grid-column: 2;
     grid-row: 1;
     align-self: end;
@@ -1742,7 +1916,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     padding: 88px 0 96px;
     background: linear-gradient(180deg, #ffffff 0%, #FFF7F8 55%, #ffffff 100%);
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 .sec--how .wrap {
     position: relative;
@@ -1762,7 +1936,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 Headline with Straight Accent Underline — full width per site rule */
 .sec--how .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.15rem, 3.8vw, 2.9rem);
     font-weight: 850;
     letter-spacing: -0.035em;
@@ -1846,7 +2020,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     border-radius: 50%;
     background: #E60023;
     color: #ffffff;
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: 19px;
     font-weight: 800;
     letter-spacing: 0.01em;
@@ -1871,7 +2045,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     height: 26px;
   }
 .how-step h3 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: 19px;
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -1932,7 +2106,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     padding: 80px 0 60px;
     isolation: isolate;
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 /* Eyebrow Pill (tinted variant of the shared .eyebrow base) */
 .sec--pins .eyebrow {
@@ -1956,7 +2130,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 Headline with Straight Accent Underline */
 .sec--pins .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.15rem, 3.8vw, 2.9rem);
     font-weight: 850;
     letter-spacing: -0.035em;
@@ -2113,7 +2287,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     padding: 80px 0 84px;
     background: linear-gradient(180deg, #ffffff 0%, #FFF7F8 55%, #ffffff 100%);
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 /* Eyebrow Pill (tinted variant of the shared .eyebrow base) */
 .sec--who .eyebrow {
@@ -2137,7 +2311,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 Headline with Straight Accent Underline — full width per site rule */
 .sec--who .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.15rem, 3.8vw, 2.9rem);
     font-weight: 850;
     letter-spacing: -0.035em;
@@ -2312,7 +2486,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     height: 16px;
   }
 .who-copy h3 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(1.55rem, 2.4vw, 2rem);
     font-weight: 850;
     letter-spacing: -0.03em;
@@ -2426,7 +2600,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     background: radial-gradient(60% 50% at 50% 60%, #FFF0F1, #ffffff 70%);
     isolation: isolate;
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 /* Eyebrow Pill */
 .sec--price .eyebrow {
@@ -2446,7 +2620,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 with Straight Accent Underline */
 .sec--price .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -2516,7 +2690,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     padding: 8px 24px;
     min-height: 36px;
     border-radius: 9999px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
     font-size: 13.5px;
     font-weight: 800;
     color: #475569;
@@ -2668,7 +2842,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     flex: none;
   }
 .plan-head h3 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     margin: 0;
     font-size: 1.35rem;
     font-weight: 850;
@@ -2687,14 +2861,14 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     line-height: 1;
   }
 .sec--price .price sup {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 700;
     vertical-align: super;
     margin-right: 2px;
   }
 .sec--price .amt {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.5rem, 3.8vw, 3.2rem);
     font-weight: 900;
     letter-spacing: -0.04em;
@@ -2853,7 +3027,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     border-radius: 50%;
     background: #ece6e5;
     color: #64748b;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
     font-size: 10px;
     font-weight: 800;
     cursor: help;
@@ -2962,7 +3136,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     background: linear-gradient(180deg, #ffffff 0%, #FFF0F1 45%, #ffffff 100%);
     isolation: isolate;
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 .sec--reviews .wrap {
     text-align: center;
@@ -2985,7 +3159,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 with Straight Accent Underline */
 .sec--reviews .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     max-width: 100%;
     font-size: clamp(2.15rem, 3.8vw, 2.9rem);
     line-height: 1.16;
@@ -3236,7 +3410,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     background: linear-gradient(180deg, #ffffff 0%, #FFF0F1 55%, #ffffff 100%);
     isolation: isolate;
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 .sec--faq .wrap {
     text-align: center;
@@ -3258,7 +3432,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 — full width per site rule */
 .sec--faq .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     max-width: 100%;
     font-size: clamp(2.15rem, 3.8vw, 2.9rem);
     line-height: 1.16;
@@ -3423,7 +3597,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     background: linear-gradient(180deg, #ffffff 0%, #FFF0F1 60%, #ffffff 100%);
     isolation: isolate;
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 .sec--myth .wrap {
     text-align: center;
@@ -3445,7 +3619,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 — full width per site rule */
 .sec--myth .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     max-width: 100%;
     font-size: clamp(2.15rem, 3.8vw, 2.9rem);
     line-height: 1.16;
@@ -3567,7 +3741,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     background: #ffffff;
     isolation: isolate;
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 .sec--learn .wrap {
     text-align: center;
@@ -3589,7 +3763,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 — full width per site rule */
 .sec--learn .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     max-width: 100%;
     font-size: clamp(2.15rem, 3.8vw, 2.9rem);
     line-height: 1.16;
@@ -3676,7 +3850,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     white-space: nowrap;
   }
 .learn-title {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: 19px;
     line-height: 1.3;
     letter-spacing: -0.02em;
@@ -3742,7 +3916,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     background: #ffffff;
     border-top: 1px solid #e2e8f0;
     padding: 60px 0 30px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 /* Pre-Footer CTA */
@@ -3767,7 +3941,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     margin: 0 0 8px;
   }
 .sf-h {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(1.8rem, 3.2vw, 2.5rem);
     font-weight: 850;
     letter-spacing: -0.035em;
@@ -3848,7 +4022,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
 /* 3 Column Links */
 .sf-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 .sf-col h3.sf-h3 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: 16px;
     font-weight: 800;
     letter-spacing: 0.01em;
@@ -3947,7 +4121,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     isolation: isolate;
     text-align: center;
     box-sizing: border-box;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 /* Background Sliding Dual Marquee */
 .cta-bg-marquee {
@@ -4021,7 +4195,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     z-index: 3;
     max-width: 100% !important;
     margin: 0 auto 18px;
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.15rem, 4.4vw, 3.4rem);
     color: #ffffff;
     letter-spacing: -0.035em;
@@ -4161,7 +4335,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
     padding: 88px 0 96px;
     background: #ffffff;
     scroll-margin-top: 84px;
-    font-family: 'Google Sans', 'Product Sans', Inter, -apple-system, sans-serif;
+    font-family: var(--font-base);
   }
 /* Subtle Ambient Gradient Accents */
 .sec--earn::before {
@@ -4198,7 +4372,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* H2 Headline with Straight Accent Underline — full width per site rule */
 .sec--earn .h2 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.15rem, 3.8vw, 2.9rem);
     font-weight: 850;
     letter-spacing: -0.035em;
@@ -4278,7 +4452,7 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   }
 /* Card Heading */
 .earn-card h3 {
-    font-family: 'Bricolage Grotesque', 'Google Sans', 'Product Sans', Inter, sans-serif;
+    font-family: var(--font-heading);
     font-size: 18px;
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -4439,4 +4613,25 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
   /* Pre-footer CTA + footer */
   .sf-cta { padding: 22px 18px; }
   .sf { padding: 36px 0 22px; }
+}
+
+
+/* Performance Hardware Acceleration & Touch Optimization */
+
+.wall-track, .rv-col-track, .cta-marquee-track--left, .cta-marquee-track--right {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    -webkit-overflow-scrolling: touch;
+  }
+  .hdr-sheet {
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 }
