@@ -3,13 +3,13 @@
 import React, { useRef, useState, useEffect } from "react";
 
 export default function Hero() {
-  const urlInputRef = useRef<HTMLInputElement>(null);
+  const [url, setUrl] = useState("");
   const [isScanning, setIsScanning] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
 
   const handleTrySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const urlVal = urlInputRef.current ? urlInputRef.current.value.trim() : "";
+    const urlVal = url.trim();
     if (!urlVal) return;
     setIsScanning(true);
     setTimeout(() => {
@@ -183,7 +183,15 @@ export default function Hero() {
       </svg>
 
       <form className="try-form" id="heroTryForm" onSubmit={handleTrySubmit}>
-        <input ref={urlInputRef} className="try-input" id="heroUrl" type="url" placeholder="Paste a blog post or product URL" required defaultValue="" />
+        <input
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          className="try-input"
+          id="heroUrl"
+          type="url"
+          placeholder="Paste a blog post or product URL"
+          required
+        />
         <button type="submit" className="try-btn" id="heroSubmitBtn" disabled={isScanning}>
           {isScanning ? (
             <span>Scanning post &amp; brand...</span>

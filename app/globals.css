@@ -627,14 +627,18 @@ button, [role="button"], select, summary, input:not([type="checkbox"], [type="ra
 .hdr-acc-panel .mm-item {
     width: 100%;
     display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 10px;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 12px;
     border-radius: 10px;
     background: transparent;
     text-decoration: none;
     box-sizing: border-box;
     transition: background 0.15s ease;
+  }
+.hdr-acc-panel .mm-item > span:not(.mm-ic) {
+    flex: 1;
+    min-width: 0;
   }
 .hdr-acc-panel .mm-item:hover,
 .hdr-acc-panel .mm-item:active {

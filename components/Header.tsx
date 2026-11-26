@@ -168,7 +168,7 @@ export default function Header() {
           {/* Header Actions */}
           <div className="hdr-actions">
             <a className="btn btn--demo" href="#demo"><span className="demo-play" aria-hidden="true"><svg viewBox="0 0 12 12" width="9" height="9" fill="currentColor" aria-hidden="true"><path d="M3 1.8v8.4c0 .7.8 1.2 1.4.8l6.8-4.2c.6-.4.6-1.2 0-1.6L4.4 1C3.8.6 3 1.1 3 1.8z"/></svg></span><span className="demo-label">Live Demo</span></a>
-            <a className="btn btn--primary" href="#pricing">Get Started Free</a>
+            <a className="btn btn--primary" href="/signup">Get Started Free</a>
 
             {/* Mobile Burger Toggle Button */}
             <button className="hdr-burger" type="button" aria-label={drawerOpen ? "Close menu" : "Open menu"} aria-expanded={drawerOpen} id="mobile-toggle" onClick={toggleDrawer}>
@@ -476,7 +476,7 @@ export default function Header() {
             </span>
             <span className="demo-label">Live Demo</span>
           </a>
-          <a className="btn btn--primary" href="#pricing" onClick={closeDrawer}>Get Started Free</a>
+          <a className="btn btn--primary" href="/signup" onClick={closeDrawer}>Get Started Free</a>
         </div>
       </div>
     </>
